@@ -10,9 +10,7 @@ public class PlayerController : MonoBehaviour
     public static PlayerController Instance;
     public float xPlayerPos;
     public float playerSpeed;
-    private Quaternion targetplus = Quaternion.Euler(0, 0, 10);
-    private Quaternion targetminus = Quaternion.Euler(0, 0, -10);
-    private float timeCount = 0;
+    public bool notMoving;
     private void Awake()
     {
         Instance = this;
@@ -29,6 +27,7 @@ public class PlayerController : MonoBehaviour
     {
         initPos = transform.position;
         playerSpeed = initSpeed;
+        notMoving = false;
         
     }
 
@@ -42,14 +41,18 @@ public class PlayerController : MonoBehaviour
         xPlayerPos = transform.position.x;
 
         if (GameManager.Instance.State != GameManager.GameState.PlayGame) return;
-
+        RaycastHit2D hit = Physics2D.Raycast(new Vector2 (transform.position.x+0.5f,transform.position.y-0.2f), Vector2.right);
+        float distance = Mathf.Abs(hit.point.x - transform.position.x-0.5f);
+        if (hit && distance < 0.1f) notMoving = true;
+        else notMoving = false;
+        if (notMoving) return;
         transform.Translate(transform.right * Time.deltaTime * playerSpeed);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.tag != "Enemy") return;
-
+        if (GameManager.Instance.State != GameManager.GameState.PlayGame) return;
         GameManager.Instance.GameStateUpdate(GameManager.GameState.LoseGame);
     }
 

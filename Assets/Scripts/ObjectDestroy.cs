@@ -23,7 +23,7 @@ public class ObjectDestroy : MonoBehaviour
 
     private void InitAndDestroy()
     {
-       CreateObject.Instance.GenerateObject();
+      // CreateObject.Instance.GenerateObject();
         Destroy(gameObject);
     }
 

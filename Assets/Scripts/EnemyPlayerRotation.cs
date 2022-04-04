@@ -7,12 +7,19 @@ public class EnemyPlayerRotation : MonoBehaviour
     [SerializeField] private Quaternion targetPlus;
     [SerializeField] private Quaternion targetMinus;
     [SerializeField] private float TimerControler;
+    [SerializeField] private bool isItPlayer;
     private float timeCountPlus = 0;
     private float timeCountMinus = 0;
     
 
      void FixedUpdate()
     {
+        if (GameManager.Instance.State != GameManager.GameState.PlayGame) return;
+        if (isItPlayer && PlayerController.Instance.notMoving) {
+            transform.rotation = new Quaternion(0, 0, 0, 0);
+            return;
+        }
+     
         rotatingFunction();
     }
     private void rotatingFunction()

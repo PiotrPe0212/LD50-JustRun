@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
         }
 
         OnGameStateChange?.Invoke(newState);
+        print(newState);
     }
     
 
@@ -54,6 +55,12 @@ public enum GameState {
     PlayGame,
     LoseGame
     
+    }
+
+    public string ScoreChange()
+    {
+        string score = "Score:" + Mathf.RoundToInt(PlayerController.Instance.xPlayerPos).ToString();
+        return score;
     }
 
 }

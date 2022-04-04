@@ -17,20 +17,29 @@ public class GroundGeneration : MonoBehaviour
     private float initPos;
     private float actualPos;
     private float actulalPosBackground;
-    private bool initCreated = false;
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        GameManager.OnGameStateChange += StateChange;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.OnGameStateChange -= StateChange;
+    }
     void Start()
     {
         initPos = -8.5f;
         actualPos = initPos;
         actulalPosBackground = initPos;
-        InitialCreating();
         InvokeRepeating("CreatingGround", 2.0f, 1.0f);
-        InvokeRepeating("BackgroundCreating", 2.0f, 2.0f);
+        InvokeRepeating("BackgroundCreating", 2.0f, 1.0f);
     }
 
     private void CreatingGround()
-    {if (GameManager.Instance.State != GameManager.GameState.PlayGame && initCreated) return;
+    {if (GameManager.Instance.State != GameManager.GameState.PlayGame) return;
+        //if (PlayerController.Instance.notMoving) return;
         GameObject ground;
         float yPos = -1.5f;
         for (int i = 0; i < 3; i++)
@@ -59,7 +68,8 @@ public class GroundGeneration : MonoBehaviour
 
     private void BackgroundCreating()
     {
-        if (GameManager.Instance.State != GameManager.GameState.PlayGame && initCreated) return;
+        if (GameManager.Instance.State != GameManager.GameState.PlayGame) return;
+        //if (PlayerController.Instance.notMoving) return;
         GameObject background;
         float yPos = -0.65f;
         for (int i = 0; i < 2; i++)
@@ -83,16 +93,30 @@ public class GroundGeneration : MonoBehaviour
         }
         actulalPosBackground += 1;
     }
-    
-    private void InitialCreating()
+    private void LateUpdate()
     {
-        for( int i =0; i<20; i++)
+        if (GameManager.Instance.State != GameManager.GameState.LoseGame) return;
+    }
+    private void StateChange(GameManager.GameState state)
+    {
+        if(state == GameManager.GameState.LoseGame)
+        {
+            actualPos = initPos;
+            actulalPosBackground = initPos;
+        }
+        if (state != GameManager.GameState.PlayGame) return;
+        InitCreating();
+        
+    }
+
+
+    private void InitCreating()
+    {
+        for (int i = 0; i < 20; i++)
         {
             CreatingGround();
             BackgroundCreating();
 
         }
-        initCreated = true;
     }
-
 }
