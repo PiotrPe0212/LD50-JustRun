@@ -31,13 +31,14 @@ public class EnemyController : MonoBehaviour
 
     private void StateChange(GameManager.GameState state)
     {
-        if (state == GameManager.GameState.PlayGame) restartParams();
+        if (state == GameManager.GameState.LoseGame) restartParams();
     }
     void FixedUpdate()
     {
        
         if (GameManager.Instance.State != GameManager.GameState.PlayGame) return;      
         transform.Translate(transform.right * Time.deltaTime * enemySpeed);
+        speedUp();
     }
 
     private void restartParams()
@@ -46,6 +47,10 @@ public class EnemyController : MonoBehaviour
         enemySpeed = initSpeed;
     }
 
-  
-   
-}
+    private void speedUp()
+    {
+        if (enemySpeed >= 18) return;
+        enemySpeed = 1.5f + Mathf.Round(transform.position.x) / 18;
+    }
+
+    }

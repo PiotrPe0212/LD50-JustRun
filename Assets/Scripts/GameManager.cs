@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject MenuCanvas;
     [SerializeField]
     private GameObject LoseCanvas;
-
     public static GameManager Instance;
 
     public GameState State;
@@ -57,10 +57,6 @@ public enum GameState {
     
     }
 
-    public string ScoreChange()
-    {
-        string score = "Score:" + Mathf.RoundToInt(PlayerController.Instance.xPlayerPos).ToString();
-        return score;
-    }
+    
 
 }

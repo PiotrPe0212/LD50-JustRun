@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public float xPlayerPos;
     public float playerSpeed;
     public bool notMoving;
+    private bool speedBonus;
     private void Awake()
     {
         Instance = this;
@@ -33,7 +34,7 @@ public class PlayerController : MonoBehaviour
 
     private void StateChange(GameManager.GameState state)
     {
-        if (state == GameManager.GameState.PlayGame) restartParams();
+        if (state == GameManager.GameState.LoseGame) restartParams();
     }
  
     void FixedUpdate()
@@ -47,19 +48,40 @@ public class PlayerController : MonoBehaviour
         else notMoving = false;
         if (notMoving) return;
         transform.Translate(transform.right * Time.deltaTime * playerSpeed);
+        speedUp();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.tag != "Enemy") return;
+       
         if (GameManager.Instance.State != GameManager.GameState.PlayGame) return;
+        if (collision.collider.tag == "Enemy")
         GameManager.Instance.GameStateUpdate(GameManager.GameState.LoseGame);
+        if (collision.collider.name == "apple")
+        {
+            speedBonus = true;
+            Destroy(collision.collider.gameObject);
+        }
     }
 
     private void restartParams()
     {
         transform.position = initPos;
         playerSpeed = initSpeed;
+    }
+
+    private void speedUp()
+    {
+        if (playerSpeed >= 16) return;
+        playerSpeed = 1+Mathf.Round(xPlayerPos) / 20;
+        if (!speedBonus) return;
+        playerSpeed = 1 + Mathf.Round(xPlayerPos) / 20 +2;
+        Invoke("bonusDesactivation", 3);
+    }
+ 
+    private void bonusDesactivation()
+    {
+        speedBonus = false;
     }
 
 }

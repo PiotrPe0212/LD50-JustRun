@@ -18,7 +18,7 @@ public class CreateObject : MonoBehaviour
     }
     void Start()
     {
-        InvokeRepeating("GenerateObject", 2.0f, timeGeneration);
+        InvokeRepeating("GenerateObject", 0, timeGeneration);
     }
 
  
@@ -31,15 +31,31 @@ public class CreateObject : MonoBehaviour
     {
         if (GameManager.Instance.State != GameManager.GameState.PlayGame) return;
         if (PlayerController.Instance.notMoving) return;
-        int rand = Random.Range(0, 2);
+        int rand = Random.Range(0, 3);
         if (rand == 0) return;
-         Instantiate(objectList[Random.Range(0, objectList.Length)], 
-             new Vector3(worldCoord.x + 2 + Random.Range(0, 2), worldCoord.y - 1 - Random.Range(0, 2), 0), 
+        int randomObject = Random.Range(0, objectList.Length);
+        float yCord=0;
+        switch (randomObject)
+        {
+            case (0):
+                yCord = -0.6f;
+                break;
+            case (1):
+                yCord = -0.6f;
+                break;
+            case (2):
+                yCord = -2.8f;
+                break;
+           // case (3):
+              //  yCord = 2.5f;
+               // break;
+
+        }
+         Instantiate(objectList[randomObject], 
+             new Vector3(worldCoord.x + 2 + Random.Range(0, 2), yCord, 0), 
              Quaternion.identity, 
              parent.transform);
-        //object.GetComponent<SpriteRenderer>().sprite = objectList[Random.Range(0, objectList.Length)];
-       // object.GetComponent<SpriteRenderer>().sortingOrder = 20;
-        //Instantiate(objectList[Random.Range(0, objectList.Length)], new Vector3(playerPos + 5+ Random.Range(-2,2), 4+Random.Range(0,1.1f), 0), Quaternion.identity, parent.transform);
+       
 
     }
 }
