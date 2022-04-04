@@ -5,7 +5,6 @@ using UnityEngine;
 public class ObjectDestroy : MonoBehaviour
 {
    private  Renderer objRenderer;
-    // Start is called before the first frame update
     void Start()
     {
         objRenderer = GetComponent<Renderer>();
@@ -14,7 +13,9 @@ public class ObjectDestroy : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (gameObject.tag == "Activated") Invoke("InitAndDestroy", 1.5f);
+        if (gameObject.tag == "Activated" &&
+            gameObject.name != "RockUp"
+            ) Invoke("InitAndDestroy", 2f);
         if (objRenderer.isVisible) return;
         if (PlayerController.Instance.xPlayerPos <= transform.position.x) return;
         InitAndDestroy();
@@ -23,7 +24,6 @@ public class ObjectDestroy : MonoBehaviour
 
     private void InitAndDestroy()
     {
-      // CreateObject.Instance.GenerateObject();
         Destroy(gameObject);
     }
 

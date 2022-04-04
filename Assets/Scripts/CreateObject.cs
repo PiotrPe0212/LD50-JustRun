@@ -8,13 +8,13 @@ public class CreateObject : MonoBehaviour
     [SerializeField] private GameObject parent;
     [SerializeField] private Camera cameraObject;
     private Vector3 worldCoord;
-    [SerializeField] private float timeGeneration = 2;
+    [SerializeField] private float timeGeneration = 1.5f;
 
   
 
     private void Awake()
     {
-
+        GameManager.OnGameStateChange += StateChange;
     }
     void Start()
     {
@@ -46,9 +46,9 @@ public class CreateObject : MonoBehaviour
             case (2):
                 yCord = -2.8f;
                 break;
-           // case (3):
-              //  yCord = 2.5f;
-               // break;
+            case (3):
+                yCord = -1.55f;
+               break;
 
         }
          Instantiate(objectList[randomObject], 
@@ -57,5 +57,19 @@ public class CreateObject : MonoBehaviour
              parent.transform);
        
 
+    }
+
+    private void StateChange(GameManager.GameState state)
+    {
+        if (state != GameManager.GameState.PlayGame) return;
+        InitCreate();
+    }
+    private void InitCreate()
+    {
+        for(int i=0; i<4; i++)
+        {
+            worldCoord = new Vector3(PlayerController.Instance.xPlayerPos+2+i*2, 0, 0);
+            GenerateObject();
+        }
     }
 }

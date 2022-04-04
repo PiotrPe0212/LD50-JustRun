@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     private GameObject MenuCanvas;
     [SerializeField]
     private GameObject LoseCanvas;
+    [SerializeField] private AudioSource musicSource;
     public static GameManager Instance;
 
     public GameState State;
@@ -31,14 +32,17 @@ public class GameManager : MonoBehaviour
         switch (newState)
         {
             case GameState.MainMenu:
+                musicSource.Stop();
                 MenuCanvas.SetActive(true);
                 LoseCanvas.SetActive(false);
                 break;
             case GameState.PlayGame:
+                musicSource.Play();
                 MenuCanvas.SetActive(false);
                 LoseCanvas.SetActive(false);
                 break;
             case GameState.LoseGame:
+                musicSource.Stop();
                 LoseCanvas.SetActive(true);
                 break;
             default:
