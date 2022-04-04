@@ -1,0 +1,9 @@
+﻿.vs
+Assets/Plugins
+obj
+Temp
+Library
+Logs
+LD50.sln
+JetBrains.Frontend.2020.2.csproj
+*.csproj
