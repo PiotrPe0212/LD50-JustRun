@@ -8,10 +8,10 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private Vector3 initPos;
     [SerializeField] private int speedLimit = 18;
 
-    private float enemySpeed;
+    public float enemySpeed;
     private bool notMoving;
-    private bool speedBonus = false;
-    private bool slowBonus= false;
+    public bool speedBonus = false;
+    public bool slowBonus= false;
     private void Awake()
     {
         GameManager.OnGameStateChange += StateChange;
@@ -76,7 +76,6 @@ public class EnemyController : MonoBehaviour
         float distance = Mathf.Abs(hit.point.x - transform.position.x - 0.5f);
         if (hit && distance < 0.1f)
         {
-            print(hit.collider.gameObject.name);
             bonusAdding(hit.collider.gameObject);
             notMoving = true;
             StartCoroutine(DetectedObjectDestroy(hit.collider.gameObject));

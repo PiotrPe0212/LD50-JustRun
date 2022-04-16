@@ -89,7 +89,6 @@ public class PlayerController : MonoBehaviour
         float distance = Mathf.Abs(hit.point.x - transform.position.x - 0.5f);
         if (hit && distance < 0.1f)
         {
-            print(hit.collider.gameObject.name);
             bonusAdding(hit.collider.gameObject);
             notMoving = true;
             StartCoroutine(DetectedObjectDestroy(hit.collider.gameObject));

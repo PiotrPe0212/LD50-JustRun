@@ -8,6 +8,7 @@ public class CreateObject : MonoBehaviour
     [SerializeField] private GameObject parent;
     [SerializeField] private Camera cameraObject;
     private Vector3 worldCoord;
+    private float initPlayerPos;
     [SerializeField] private float timeGeneration = 1.5f;
 
   
@@ -16,8 +17,14 @@ public class CreateObject : MonoBehaviour
     {
         GameManager.OnGameStateChange += StateChange;
     }
+
+    private void OnDestroy()
+    {
+        GameManager.OnGameStateChange -= StateChange;
+    }
     void Start()
     {
+        initPlayerPos = PlayerController.Instance.xPlayerPos;
         InvokeRepeating("GenerateObject", 0, timeGeneration);
     }
 
@@ -62,13 +69,19 @@ public class CreateObject : MonoBehaviour
     private void StateChange(GameManager.GameState state)
     {
         if (state != GameManager.GameState.PlayGame) return;
+        foreach (Transform child in parent.transform)
+        {
+            Destroy(child.gameObject);
+            print("dest");
+        }
         InitCreate();
     }
     private void InitCreate()
     {
+        print("gener");
         for(int i=0; i<4; i++)
         {
-            worldCoord = new Vector3(PlayerController.Instance.xPlayerPos+2+i*2, 0, 0);
+            worldCoord = new Vector3(initPlayerPos+1+i*2, 0, 0);
             GenerateObject();
         }
     }

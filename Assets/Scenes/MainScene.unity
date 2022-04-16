@@ -178,6 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 111166878}
   - component: {fileID: 111166879}
+  - component: {fileID: 111166880}
   m_Layer: 0
   m_Name: Square (1)
   m_TagString: Untagged
@@ -250,6 +251,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &111166880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 111166877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ac7c87dd5dac4f4daea24fcd8728dc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &147770494
 GameObject:
   m_ObjectHideFlags: 0
@@ -1011,7 +1024,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 1
   far clip plane: 1000
   field of view: 60
   orthographic: 1
@@ -1463,6 +1476,7 @@ GameObject:
   m_Component:
   - component: {fileID: 689064176}
   - component: {fileID: 689064177}
+  - component: {fileID: 689064178}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -1535,6 +1549,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &689064178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689064175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ac7c87dd5dac4f4daea24fcd8728dc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &697923622
 GameObject:
   m_ObjectHideFlags: 0
@@ -1743,6 +1769,7 @@ GameObject:
   m_Component:
   - component: {fileID: 810088157}
   - component: {fileID: 810088158}
+  - component: {fileID: 810088159}
   m_Layer: 0
   m_Name: Square (3)
   m_TagString: Untagged
@@ -1815,6 +1842,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &810088159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 810088156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ac7c87dd5dac4f4daea24fcd8728dc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &814736144
 GameObject:
   m_ObjectHideFlags: 0
@@ -2808,6 +2847,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1808837964}
   - component: {fileID: 1808837965}
+  - component: {fileID: 1808837966}
   m_Layer: 0
   m_Name: Square (2)
   m_TagString: Untagged
@@ -2880,6 +2920,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1808837966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808837963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ac7c87dd5dac4f4daea24fcd8728dc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1910672182
 GameObject:
   m_ObjectHideFlags: 0
@@ -2934,6 +2986,7 @@ GameObject:
   - component: {fileID: 1936709098}
   - component: {fileID: 1936709099}
   - component: {fileID: 1936709100}
+  - component: {fileID: 1936709101}
   m_Layer: 0
   m_Name: Moon
   m_TagString: Untagged
@@ -3019,6 +3072,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedModifier: 0.01
+--- !u!114 &1936709101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1936709097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ac7c87dd5dac4f4daea24fcd8728dc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1989159998
 GameObject:
   m_ObjectHideFlags: 0
@@ -3209,7 +3274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.85098046, g: 0.8235295, b: 0.2392157, a: 1}
+  m_Color: {r: 0.7843138, g: 0.7607844, b: 0.22352943, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
