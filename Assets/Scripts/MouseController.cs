@@ -4,30 +4,41 @@ using UnityEngine;
 
 public class MouseController : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private Ray ray;
+    private RaycastHit2D hit;
+    private bool CorrectHit;
     void Start()
     {
         
     }
 
-    // Update is called once per frame
+
     void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            CastRay();
-        }
+    {if (hit.collider != null) print(hit.collider.name);
+        if (hit.collider == null) RestartHit();
+        if(!CorrectHit) CastRay();
+       if (Input.GetMouseButtonDown(0) && CorrectHit) Interact();
+        Invoke("RestartHit", 0.5f);
 
     }
     private void CastRay()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity);
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity);
         if (hit.collider == null) return;
-        
-            if (hit.collider.gameObject.tag == "ControlElement") hit.collider.gameObject.tag = "Activated";
+        if (hit.collider.gameObject.tag == "ControlElement") CorrectHit = true;
 
-            Debug.Log(hit.collider.gameObject.name);
         
+    }
+    private void Interact()
+    {
+        if (hit.collider == null) return;
+        hit.collider.gameObject.tag = "Activated";
+        RestartHit();
+    }
+
+    private void RestartHit()
+    {
+        CorrectHit = false;
     }
 }

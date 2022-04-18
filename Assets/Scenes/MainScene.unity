@@ -3455,7 +3455,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1409619972, guid: 2737cfd51f43366489e349539f996356, type: 3}
       propertyPath: initSpeed
-      value: 1.5
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 1409619972, guid: 2737cfd51f43366489e349539f996356, type: 3}
       propertyPath: m_Enabled
