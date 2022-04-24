@@ -11,7 +11,7 @@ public class EnemyController : MonoBehaviour
     public float enemySpeed;
     private bool notMoving;
     public bool speedBonus = false;
-    public bool slowBonus= false;
+    public bool slowBonus = false;
     private void Awake()
     {
         GameManager.OnGameStateChange += StateChange;
@@ -33,14 +33,14 @@ public class EnemyController : MonoBehaviour
     }
     void FixedUpdate()
     {
-       
+
         if (GameManager.Instance.State != GameManager.GameState.PlayGame) return;
         ReycastTest();
         if (notMoving) return;
         transform.Translate(transform.right * Time.deltaTime * enemySpeed);
         if (transform.position.y != -1) transform.position = new Vector3(transform.position.x, -1, 0);
         speedUp();
-        
+
     }
 
     private void restartParams()
@@ -51,12 +51,12 @@ public class EnemyController : MonoBehaviour
 
     private void speedUp()
     {
-       
+
         float speedAdd = Mathf.Round(transform.position.x) / 19;
         if (speedAdd >= speedLimit) speedAdd = speedLimit;
         if (speedAdd < 0) speedAdd = 0;
         enemySpeed = initSpeed + speedAdd;
-       
+
         if (slowBonus)
         {
             enemySpeed = initSpeed + speedAdd - 0.3f - speedAdd / 10;

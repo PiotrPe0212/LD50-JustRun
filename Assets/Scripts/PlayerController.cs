@@ -6,7 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float initSpeed;
     [SerializeField] private Vector3 initPos;
-    [SerializeField] private int speedLimit=16;
+    [SerializeField] private int speedLimit = 16;
+    [SerializeField] private AudioSource pickUp;
     public static PlayerController Instance;
     public float xPlayerPos;
     public float playerSpeed;
@@ -17,7 +18,7 @@ public class PlayerController : MonoBehaviour
     {
         GameManager.OnGameStateChange += StateChange;
         Instance = this;
-   
+
     }
 
     private void OnDestroy()
@@ -25,20 +26,20 @@ public class PlayerController : MonoBehaviour
         GameManager.OnGameStateChange -= StateChange;
     }
 
-  
+
     void Start()
     {
         initPos = transform.position;
         playerSpeed = initSpeed;
         notMoving = false;
-        
+
     }
 
     private void StateChange(GameManager.GameState state)
     {
         if (state == GameManager.GameState.LoseGame) restartParams();
     }
- 
+
     void FixedUpdate()
     {
         xPlayerPos = transform.position.x;
@@ -53,11 +54,11 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+
         if (GameManager.Instance.State != GameManager.GameState.PlayGame) return;
         if (collision.collider.tag == "Enemy")
-        GameManager.Instance.GameStateUpdate(GameManager.GameState.LoseGame);
-        
+            GameManager.Instance.GameStateUpdate(GameManager.GameState.LoseGame);
+
     }
 
     private void restartParams()
@@ -69,18 +70,20 @@ public class PlayerController : MonoBehaviour
     private void speedUp()
     {
         float speedAdd = Mathf.Round(xPlayerPos) / 20;
-     
+
         if (speedAdd >= speedLimit) speedAdd = speedLimit;
         playerSpeed = initSpeed + speedAdd;
-        if (slowBonus) {
-            playerSpeed = initSpeed + speedAdd - 0.3f- speedAdd / 10;
-                 Invoke("slowDeactivation", 2);
+        if (slowBonus)
+        {
+            playerSpeed = initSpeed + speedAdd - 0.3f - speedAdd / 10;
+            Invoke("slowDeactivation", 2);
         }
-        if (speedBonus) {
-            playerSpeed = initSpeed + speedAdd + 1+ speedAdd/10;
-                 Invoke("bonusDeactivation", 2);
+        if (speedBonus)
+        {
+            playerSpeed = initSpeed + speedAdd + 1 + speedAdd / 10;
+            Invoke("bonusDeactivation", 2);
         }
-       
+
     }
 
     private void ReycastTest()
@@ -95,11 +98,11 @@ public class PlayerController : MonoBehaviour
         }
         else notMoving = false;
     }
- 
+
     private void bonusDeactivation()
     {
         speedBonus = false;
-       
+
     }
     private void slowDeactivation()
     {
@@ -115,11 +118,13 @@ public class PlayerController : MonoBehaviour
     {
         if (type.name == "Apple")
         {
+            pickUp.Play();
             speedBonus = true;
             Destroy(type);
         }
         else if (type.name == "Bird")
         {
+            pickUp.Play();
             slowBonus = true;
             Destroy(type);
         }

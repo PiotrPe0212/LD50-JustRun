@@ -9,9 +9,9 @@ public class CreateObject : MonoBehaviour
     [SerializeField] private Camera cameraObject;
     private Vector3 worldCoord;
     private float initPlayerPos;
-    [SerializeField] private float timeGeneration = 1.5f;
+    private float actualPlayerSpeed;
 
-  
+
 
     private void Awake()
     {
@@ -25,23 +25,42 @@ public class CreateObject : MonoBehaviour
     void Start()
     {
         initPlayerPos = PlayerController.Instance.xPlayerPos;
-        InvokeRepeating("GenerateObject", 0, timeGeneration);
+        InvokeRepeating("Invoke1", 0, 1.5f);
+        InvokeRepeating("Invoke2", 0, 1);
+        InvokeRepeating("Invoke3", 0, 0.5f);
     }
 
- 
+
     void Update()
     {
         worldCoord = cameraObject.ViewportToWorldPoint(new Vector3(1, 0.5f, 0));
+        actualPlayerSpeed = PlayerController.Instance.playerSpeed;
     }
 
-    public  void GenerateObject()
+    private void Invoke1()
+    {
+        if (actualPlayerSpeed > 3.5f) return;
+        GenerateObject();
+
+    }
+    private void Invoke2()
+    {
+        if (actualPlayerSpeed < 3.5f || actualPlayerSpeed > 7) return;
+        GenerateObject();
+    }
+    private void Invoke3()
+    {
+        if (actualPlayerSpeed < 7) return;
+        GenerateObject();
+    }
+    private void GenerateObject()
     {
         if (GameManager.Instance.State != GameManager.GameState.PlayGame) return;
         if (PlayerController.Instance.notMoving) return;
         int rand = Random.Range(0, 3);
         if (rand == 0) return;
         int randomObject = Random.Range(0, objectList.Length);
-        float yCord=0;
+        float yCord = 0;
         switch (randomObject)
         {
             case (0):
@@ -55,14 +74,14 @@ public class CreateObject : MonoBehaviour
                 break;
             case (3):
                 yCord = -1.55f;
-               break;
+                break;
 
         }
-         Instantiate(objectList[randomObject], 
-             new Vector3(worldCoord.x + 2 + Random.Range(0, 2), yCord, 0), 
-             Quaternion.identity, 
-             parent.transform);
-       
+        Instantiate(objectList[randomObject],
+            new Vector3(worldCoord.x + 2 + Random.Range(0, 2), yCord, 0),
+            Quaternion.identity,
+            parent.transform);
+
 
     }
 
@@ -79,9 +98,9 @@ public class CreateObject : MonoBehaviour
     private void InitCreate()
     {
         print("gener");
-        for(int i=0; i<4; i++)
+        for (int i = 0; i < 4; i++)
         {
-            worldCoord = new Vector3(initPlayerPos+1+i*2, 0, 0);
+            worldCoord = new Vector3(initPlayerPos + 1 + i * 2, 0, 0);
             GenerateObject();
         }
     }

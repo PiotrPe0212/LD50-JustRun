@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;        
+        Instance = this;
     }
     void Start()
     {
@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     public void GameStateUpdate(GameState newState)
     {
         State = newState;
-        
+
         switch (newState)
         {
             case GameState.MainMenu:
@@ -52,15 +52,16 @@ public class GameManager : MonoBehaviour
         OnGameStateChange?.Invoke(newState);
         print(newState);
     }
-    
 
-public enum GameState { 
-    MainMenu,
-    PlayGame,
-    LoseGame
-    
+
+    public enum GameState
+    {
+        MainMenu,
+        PlayGame,
+        LoseGame
+
     }
 
-    
+
 
 }

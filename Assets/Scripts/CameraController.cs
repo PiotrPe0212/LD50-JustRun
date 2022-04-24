@@ -32,10 +32,10 @@ public class CameraController : MonoBehaviour
             endPos.y -= posOffset.y;
             endPos.z = gameObject.transform.position.z;
 
-            transform.position = Vector3.Lerp(startPos, endPos, timeOffset* Time.deltaTime);
+            transform.position = Vector3.Lerp(startPos, endPos, timeOffset * Time.deltaTime);
             correctInitPos = false;
-            colorGrading.hueShift.value = player.transform.position.x/6;
-            grain.intensity.value =1.5f/ Mathf.Abs(enemy.transform.position.x - player.transform.position.x);
+            colorGrading.hueShift.value = player.transform.position.x / 6;
+            grain.intensity.value = 1.5f / Mathf.Abs(enemy.transform.position.x - player.transform.position.x);
         }
         else
         {

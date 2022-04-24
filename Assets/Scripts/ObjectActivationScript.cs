@@ -8,15 +8,16 @@ public class ObjectActivationScript : MonoBehaviour
     [SerializeField] private float movingDistance;
     [SerializeField] private bool goUp;
     [SerializeField] private bool goRight;
-     private  Vector3 goRightPos;
-   private  Vector3 goUpPos;
+
+    private Vector3 goRightPos;
+    private Vector3 goUpPos;
     private Vector3 goDownPos;
     private float time;
     // Start is called before the first frame update
     void Start()
     {
         goRightPos = new Vector3(transform.position.x + movingDistance, transform.position.y, transform.position.z);
-        goUpPos = new Vector3(transform.position.x, transform.position.y+movingDistance, transform.position.z);
+        goUpPos = new Vector3(transform.position.x, transform.position.y + movingDistance, transform.position.z);
         goDownPos = new Vector3(transform.position.x, transform.position.y - movingDistance, transform.position.z);
         time = 0;
     }
@@ -26,15 +27,15 @@ public class ObjectActivationScript : MonoBehaviour
     {
         if (gameObject.tag != "Activated") return;
         MovingFunction();
-        
-        
+
+
     }
 
     private void MovingFunction()
     {
         if (goRight) GoRightFunction();
         else UpDown();
-       
+
 
     }
 
@@ -47,12 +48,13 @@ public class ObjectActivationScript : MonoBehaviour
     private void UpDown()
     {
 
-        if (!goUp) {
+        if (!goUp)
+        {
             transform.position = Vector3.Lerp(transform.position, goDownPos, time);
             time += Time.deltaTime;
-        } 
-       else
-            {
+        }
+        else
+        {
             transform.position = Vector3.Lerp(transform.position, goUpPos, time);
             time += Time.deltaTime;
 
